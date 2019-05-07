@@ -19,7 +19,6 @@ const ToDo = mongoose.model("ToDo", { title: String, done: Boolean });
 app.get("/", async (req, res) => {
   try {
     const todos = await ToDo.find();
-    await todos.save();
 
     return res.json(todos);
   } catch (error) {
