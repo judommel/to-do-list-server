@@ -29,7 +29,7 @@ app.post("/create", async (req, res) => {
       done: false
     });
 
-    await toDo.Do.save();
+    await toDo.save();
     return res.json(`You know have ${req.body.title} to do!`);
   } catch (error) {
     console.log(error);
