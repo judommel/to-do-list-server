@@ -13,12 +13,14 @@ mongoose.connect(process.env.MONGODB_URI, {
 
 const ToDo = mongoose.model("ToDo", { title: String, done: Boolean });
 
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
   try {
-    return res.json("Ok");
+    const todos = await ToDo.find();
+
+    return res.json(ToDo);
   } catch (error) {
     console.log(error);
-    res.status(400).json("Error");
+    res.status(400).json("Couldn't find your to do list.");
   }
 });
 
@@ -30,7 +32,7 @@ app.post("/create", async (req, res) => {
     });
 
     await toDo.save();
-    return res.json(`You know have ${req.body.title} to do!`);
+    return res.json(`You know have "${req.body.title}" to do!`);
   } catch (error) {
     console.log(error);
     res.status(400).json("Error");
