@@ -54,7 +54,9 @@ app.post("/update", async (req, res) => {
 
     await toDo.save();
 
-    return res.json("Updated!");
+    const toDos = await ToDo.find();
+
+    return res.json(toDos);
   } catch (error) {
     console.log(error);
     res.status(400).json("Error");
@@ -67,7 +69,9 @@ app.post("/delete", async (req, res) => {
 
     await toDo.remove();
 
-    return res.json(`Deleted! You don't have to do "${toDo.title}" anymore`);
+    const toDos = await ToDo.find();
+
+    return res.json(toDos);
   } catch (error) {
     console.log(error);
     res.status(400).json("Error");
