@@ -35,7 +35,9 @@ app.post("/create", async (req, res) => {
     });
 
     await toDo.save();
-    return res.json(`You now have "${req.body.title}" to do!`);
+    const toDos = await ToDo.find();
+
+    return res.json(toDos);
   } catch (error) {
     console.log(error);
     res.status(400).json("Error");
