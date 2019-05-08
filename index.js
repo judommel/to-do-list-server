@@ -48,11 +48,7 @@ app.post("/update", async (req, res) => {
   try {
     const toDo = await ToDo.findById(req.body.id);
 
-    if (toDo.done) {
-      toDo.done = false;
-    } else {
-      toDo.done = true;
-    }
+    toDo.done = !toDo.done;
 
     await toDo.save();
 
