@@ -35,9 +35,8 @@ app.post("/create", async (req, res) => {
     });
 
     await toDo.save();
-    const toDos = await ToDo.find();
 
-    return res.json(toDos);
+    return res.json(toDo);
   } catch (error) {
     console.log(error);
     res.status(400).json("Error");
@@ -84,6 +83,6 @@ app.post("/delete", async (req, res) => {
   }
 });
 
-app.listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT || 3001, () => {
   console.log("Los geht's");
 });
