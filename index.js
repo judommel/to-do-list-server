@@ -48,13 +48,17 @@ app.post("/update", async (req, res) => {
   try {
     const toDo = await ToDo.findById(req.body.id);
 
-    toDo.done = !toDo.done;
+    if (toDo === null) {
+      return res.status(400).json({ message: "No matching task" });
+    } else {
+      toDo.done = !toDo.done;
 
-    await toDo.save();
+      await toDo.save();
 
-    const toDos = await ToDo.find();
+      const toDos = await ToDo.find();
 
-    return res.json(toDos);
+      return res.json(toDos);
+    }
   } catch (error) {
     console.log(error);
     res.status(400).json("Error");
@@ -65,11 +69,15 @@ app.post("/delete", async (req, res) => {
   try {
     const toDo = await ToDo.findById(req.body.id);
 
-    await toDo.remove();
+    if (toDo === null) {
+      return res.status(400).json({ message: "No matching task" });
+    } else {
+      await toDo.remove();
 
-    const toDos = await ToDo.find();
+      const toDos = await ToDo.find();
 
-    return res.json(toDos);
+      return res.json(toDos);
+    }
   } catch (error) {
     console.log(error);
     res.status(400).json("Error");
