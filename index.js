@@ -14,7 +14,7 @@ mongoose.connect(
   }
 );
 
-const ToDo = mongoose.model("ToDo", { title: String, done: Boolean });
+const ToDo = require("./models/ToDo");
 
 app.get("/", async (req, res) => {
   try {
